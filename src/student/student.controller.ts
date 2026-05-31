@@ -1,6 +1,10 @@
+/* eslint-disable @typescript-eslint/require-await */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable prettier/prettier */
 import { Body, Controller, Delete, Get, Param, Patch, Post, Put } from '@nestjs/common';
 import { StudentService } from './student.service';
+import { Student } from './student.schema';
+
 
 @Controller('student')
 export class StudentController {
@@ -34,4 +38,9 @@ export class StudentController {
         return this.studentService.deleteStudent(Number(id));
     }
 
+    @Post('studentdata')                     // to add data in DB
+    async addStudent(@Body() data: Partial<Student>){
+        console.log('BODY RECEIVED:', data);
+        return this.studentService.createStudentinDb(data);
+    }
 }

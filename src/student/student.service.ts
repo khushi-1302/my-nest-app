@@ -1,9 +1,16 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable prettier/prettier */
 import { Injectable, NotFoundException } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
+import { Student, StudentDocument } from './student.schema';
+import { Model } from 'mongoose';
 
 @Injectable()
 export class StudentService {
+    constructor(
+        @InjectModel(Student.name) private studentModel: Model<StudentDocument>
+    ) { }
     private students = [
         { id: 1, name: 'Jack', age: 23 }, //0 index
         { id: 2, name: 'Jate', age: 25 }, //1 index
@@ -50,6 +57,12 @@ export class StudentService {
         if(index === -1) throw new NotFoundException('Student not found!');
         const deleted = this.students.splice(index,1) //1,1
         return { message: 'Student Deleted', student: deleted[0]};
+    }
+
+    //to insert data into db
+    async createStudentinDb(data: Partial<Student>): Promise<Student> {
+        const newStudent = new this.studentModel(data);
+        return newStudent.save();
     }
 
 }
