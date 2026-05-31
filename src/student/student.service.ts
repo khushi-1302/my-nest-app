@@ -73,5 +73,18 @@ export class StudentService {
         return this.studentModel.findById(id).exec();
     }
 
+    async updateStudentinDb(id: string, data: Partial<Student>): Promise<Student | null> {
+        // return this.studentModel.findByIdAndUpdate(id, data, {new: true}).exec();
+        const updated = await this.studentModel.findByIdAndUpdate(id, {                //PUT should take full data into consideration
+            name: data.name ?? null, 
+            age: data.age ?? null,
+            email: data.email ?? null,
+        }, { overwrite: true, new: true});
+        return updated;
+    }
+
+    async patchStudentinDb(id: string, data: Partial<Student>): Promise<Student | null>{
+        return this.studentModel.findByIdAndUpdate(id, data, {new: true}).exec();      //PATCH is for selected fields,not all data
+    }
 
 }

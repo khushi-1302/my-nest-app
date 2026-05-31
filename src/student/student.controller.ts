@@ -58,4 +58,20 @@ export class StudentController {
      async getStudent(@Param('id') id: string){
         return this.studentService.getStudentByIdfromDb(id);
     }
+
+    @Put('db/:id')
+    async updateStudent(
+        @Param('id') id: string,
+        @Body() data: Partial<Student>,
+    ){
+        return this.studentService.updateStudentinDb(id,data);
+    }
+
+    @Patch('db/:id')
+    async patchStudent(
+        @Param('id') id: string,
+        @Body() data: Partial<Student>,
+    ){
+        return this.studentService.patchStudentinDb(id,data);
+    }
 }
