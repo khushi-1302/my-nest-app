@@ -62,7 +62,16 @@ export class StudentService {
     //to insert data into db
     async createStudentinDb(data: Partial<Student>): Promise<Student> {
         const newStudent = new this.studentModel(data);
-        return newStudent.save();
+        return newStudent.save();  //save inserts data into database
     }
+
+    async getAllStudentsfromDb(): Promise<Student[]> {
+        return this.studentModel.find().exec();
+    }
+
+    async getStudentByIdfromDb(id: string): Promise<Student | null> {
+        return this.studentModel.findById(id).exec();
+    }
+
 
 }

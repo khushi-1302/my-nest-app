@@ -15,6 +15,11 @@ export class StudentController {
         return this.studentService.getAllStudents();
     }
 
+    @Get('db')
+    async getStudents(){
+        return this.studentService.getAllStudentsfromDb();
+    }
+
     @Get(':id')
     getOne(@Param('id') id: string){
         return this.studentService.getStudentById(Number(id))
@@ -38,9 +43,19 @@ export class StudentController {
         return this.studentService.deleteStudent(Number(id));
     }
 
-    @Post('studentdata')                     // to add data in DB
+    @Post('db')                     // to add data in DB
     async addStudent(@Body() data: Partial<Student>){
         console.log('BODY RECEIVED:', data);
         return this.studentService.createStudentinDb(data);
+    }
+
+    // @Get('db')
+    // async getStudents(){
+    //     return this.studentService.getAllStudentsfromDb();
+    // }
+
+    @Get('db/:id')
+     async getStudent(@Param('id') id: string){
+        return this.studentService.getStudentByIdfromDb(id);
     }
 }
