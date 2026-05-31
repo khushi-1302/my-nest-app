@@ -74,4 +74,9 @@ export class StudentController {
     ){
         return this.studentService.patchStudentinDb(id,data);
     }
+
+    @Delete('db/:id')
+    async deleteStudent(@Param('id') id: string) {
+        return this.studentService.deleteStudentfromDb(id);
+    }
 }

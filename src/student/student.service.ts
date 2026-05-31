@@ -87,4 +87,7 @@ export class StudentService {
         return this.studentModel.findByIdAndUpdate(id, data, {new: true}).exec();      //PATCH is for selected fields,not all data
     }
 
+    async deleteStudentfromDb(id: string): Promise<Student | null> {
+        return this.studentModel.findByIdAndDelete(id).exec();
+    }
 }
