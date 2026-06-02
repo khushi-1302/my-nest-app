@@ -6,7 +6,6 @@ import { AppService } from './app.service';
 // import { UserController } from './user/user.controller';
 import { ProductService } from './product/product.service';
 import { ProductController } from './product/product.controller';
-import { EmployeeModule } from './employee/employee.module';
 import { CategoryModule } from './category/category.module';
 import { StudentModule } from './student/student.module';
 import { CustomerModule } from './customer/customer.module';
@@ -19,9 +18,10 @@ import { DatabaseController } from './database/database.controller';
 import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { UserModule } from './user/user.module';
+import { EmployeeModule } from './employee/employee.module';
 
 @Module({
-  imports: [EmployeeModule, CategoryModule, StudentModule, CustomerModule, ConfigModule.forRoot({isGlobal: true}), MongooseModule.forRoot(process.env.MONGO_URI!), UserModule ],
+  imports: [CategoryModule, StudentModule, CustomerModule, ConfigModule.forRoot({isGlobal: true}), MongooseModule.forRoot(process.env.MONGO_URI!), UserModule, EmployeeModule ],
   controllers: [AppController, ProductController, MynameController, UserRolesController, ExceptionController, DatabaseController],
   providers: [AppService, ProductService, DatabaseService],
 })

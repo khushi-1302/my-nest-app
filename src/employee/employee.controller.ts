@@ -1,10 +1,21 @@
+/* eslint-disable @typescript-eslint/no-unsafe-return */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable prettier/prettier */
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Post } from '@nestjs/common';
+import { EmployeeService } from './employee.service';
 
 @Controller('employee')
 export class EmployeeController {
+    constructor(private readonly employeeService: EmployeeService){}
+
+    @Post()
+    create(){
+        return this.employeeService.createEmployee();
+    }
+
     @Get()
-    getEmployee(){
-        return 'Employee data fetched successfully!!'
+    getAll(){
+        return this.employeeService.findAll();
     }
 }
