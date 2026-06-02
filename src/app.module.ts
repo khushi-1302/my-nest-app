@@ -19,9 +19,10 @@ import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { UserModule } from './user/user.module';
 import { EmployeeModule } from './employee/employee.module';
+import { ItemModule } from './item/item.module';
 
 @Module({
-  imports: [CategoryModule, StudentModule, CustomerModule, ConfigModule.forRoot({isGlobal: true}), MongooseModule.forRoot(process.env.MONGO_URI!), UserModule, EmployeeModule ],
+  imports: [CategoryModule, StudentModule, CustomerModule, ConfigModule.forRoot({isGlobal: true}), MongooseModule.forRoot(process.env.MONGO_URI!), UserModule, EmployeeModule, ItemModule ],
   controllers: [AppController, ProductController, MynameController, UserRolesController, ExceptionController, DatabaseController],
   providers: [AppService, ProductService, DatabaseService],
 })
